@@ -1,0 +1,24 @@
+{
+  "name": "cypress-dojo-ambev-web",
+  "version": "1.0.0",
+  "description": "Treinamento sobre Cypress Web",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/henriquecervi/cypress-dojo-ambev-web.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/henriquecervi/cypress-dojo-ambev-web/issues"
+  },
+  "homepage": "https://github.com/henriquecervi/cypress-dojo-ambev-web#readme",
+  "devDependencies": {
+    "cypress": "^10.8.0",
+    "faker-br": "^0.4.1"
+  }
+}
