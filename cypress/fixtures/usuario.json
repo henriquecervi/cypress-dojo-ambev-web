@@ -2,6 +2,7 @@
     {
         "nome": "Henrique Cervi",
         "email": "hcervi@teste.com",
-        "senha": "123456"
+        "senha": "123456",
+        "senhaErrada": "654321"
     }
 ]

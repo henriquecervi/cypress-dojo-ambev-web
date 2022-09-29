@@ -1,17 +1,20 @@
 /// <reference types="cypress" />
 
 const faker = require('faker-br')
+import usuario from '../../fixtures/usuario.json'
 
 describe('Funcionalidade: Cadastro', () => {
 
     beforeEach(() => {
+        cy.fixture('usuario').then((user) => {
+            user = user
+        })
         cy.visit('/')
     });
     
     it('Cadastrar novo usuário com sucesso', () => {   
         
         let nome = `${faker.name.firstName()} ${faker.name.lastName()}`
-        //let email = faker.internet.email(nome)
         let password = faker.internet.password()
         
         cy.get('[data-test="landing-register"]').click()
@@ -25,5 +28,10 @@ describe('Funcionalidade: Cadastro', () => {
         cy.get('.large').should('contain', 'Dashboard').and('exist')        
         
     });   
+
+    it('Cadastrar usuário com e-mail repetido', () => {
+        cy.cadastroUsuario(usuario[0].nome, usuario[0].email, usuario[0].senha)   
+        cy.alertMsg().should('have.text', 'Usuário já registrado')   
+    });
 
 });

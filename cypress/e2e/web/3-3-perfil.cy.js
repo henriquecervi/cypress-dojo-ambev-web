@@ -1,27 +1,47 @@
 /// <reference types="cypress" />
 
-import usuario from '../../fixtures/usuario.json'
+let bodyData
 
 describe('Funcionalidade: Criar Perfil', () => {
 
     beforeEach(() => {
-        cy.fixture('usuario').then((user) => {
-            user = user            
-            cy.login(usuario[0].email, usuario[0].senha)
+        cy.generateFixture()
+        cy.fixture('profileData.json').then((profileData) => {
+            bodyData = profileData
         })
     });
 
-    // melhorar dados no type e criar custom command
     it('Deve criar um perfil com sucesso', () => {
-        cy.get('[data-test="dashboard-createProfile"]').click()
-        cy.get('#mui-component-select-status').click()
-        cy.get('[data-value="QA Senior"]').click()
-        cy.get('[data-test="profile-company"]').type("Ambev Tech")
-        cy.get('[data-test="profile-webSite"]').type("https://www.linkedin.com/in/henriquecervi/")
-        cy.get('[data-test="profile-location"]').type("São Paulo")
-        cy.get('[data-test="profile-skills"]').type('JS, Java, Automação')
-        cy.get('[data-test="profile-gitHub"]').type('https://github.com/henriquecervi')
-        cy.get('[data-test="profile-bio"]').type('QA apaixonado pela profissão')
-        cy.get('[data-test="profile-submit"]').click()        
+        cy.cadastroUsuario(bodyData.profileData[0].nome, 
+            bodyData.profileData[0].email,
+            bodyData.profileData[0].pass)
+        cy.criarPerfil(bodyData.profileData[0].company, 
+            bodyData.profileData[0].url, 
+            bodyData.profileData[0].location, 
+            bodyData.profileData[0].skills, bodyData.profileData[0].bio) 
+        cy.validarPagePerfil().should('have.text', ' Editar Perfil')  
+    });
+
+    it('Deve criar perfil com sucesso - Commands', () => {
+        cy.cadastroUsuario(bodyData.profileData[1].nome, 
+            bodyData.profileData[1].email,
+            bodyData.profileData[1].pass)
+        cy.criarPerfil(bodyData.profileData[1].company, 
+            bodyData.profileData[1].url,
+            bodyData.profileData[1].location, 
+            bodyData.profileData[1].skills, bodyData.profileData[0].bio) 
+        cy.validarPagePerfil().should('have.text', ' Editar Perfil')        
+    });
+
+    it('Deve criar perfil sem sucesso - Commands - site errado', () => {
+        cy.cadastroUsuario(bodyData.profileData[2].nome, 
+            bodyData.profileData[2].email,
+            bodyData.profileData[2].pass)
+        cy.criarPerfil(bodyData.profileData[2].company, 
+            bodyData.profileData[2].wrongUrl,
+            bodyData.profileData[2].location, 
+            bodyData.profileData[2].skills, 
+            bodyData.profileData[2].bio)  
+        cy.get('.MuiFormHelperText-filled').should('have.text', 'Digite uma url válida')              
     });
 });
