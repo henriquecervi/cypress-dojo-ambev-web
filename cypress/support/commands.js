@@ -27,22 +27,22 @@
 Cypress.Commands.add('generateFixture', () => {
   const faker = require('faker-br')
 
-  cy.writeFile('cypress/fixtures/profileData.json',  {
-    'profileData':Cypress._.times(3, () => {
-      return  {
-      'nome':`${faker.name.firstName()}`, 
-      'email':`${faker.internet.email()}`,
-      'pass':`${faker.internet.password()}`,
-      'company':`${faker.company.companyName()}`,
-      'url':`${faker.internet.url()}`,
-      'wrongUrl':`www.siteErrado.com.br`,
-      'location': `${faker.address.city()}`,
-      'skills': `${faker.random.words()}`,
-      'bio': `${faker.name.jobDescriptor()}`      
+  cy.writeFile('cypress/fixtures/profileData.json', {
+    'profileData': Cypress._.times(3, () => {
+      return {
+        'nome': `${faker.name.firstName()}`,
+        'email': `${faker.internet.email()}`,
+        'pass': `${faker.internet.password()}`,
+        'company': `${faker.company.companyName()}`,
+        'url': `${faker.internet.url()}`,
+        'wrongUrl': `www.siteErrado.com.br`,
+        'location': `${faker.address.city()}`,
+        'skills': `${faker.random.words()}`,
+        'bio': `${faker.name.jobDescriptor()}`
       }
     })
   })
-  })
+})
 
 
 Cypress.Commands.add('login', (email, senha) => {
@@ -82,4 +82,17 @@ Cypress.Commands.add('criarPerfil', (company, url, location, skills, bio) => {
 
 Cypress.Commands.add('validarPagePerfil', () => {
   cy.get('[data-test="dashboard-editProfile"]')
+})
+
+Cypress.Commands.add('gerarToken', (email, senha) => {
+  cy.request({
+    method: 'POST',
+    url: '/api/auth',
+    body: {
+      "email": email,
+      "password": senha
+    }
+  }).then((response) => {
+    return response.body.jwt
+  })
 })

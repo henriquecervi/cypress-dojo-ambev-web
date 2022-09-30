@@ -11,6 +11,11 @@ describe('Funcionalidade: Cadastro', () => {
         })
         cy.visit('/')
     });
+
+    afterEach('Screenshot depois testes',() => {
+        cy.screenshot()
+        
+    });
     
     it('Cadastrar novo usuário com sucesso', () => {   
         
