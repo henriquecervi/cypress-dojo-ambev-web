@@ -1,7 +1,7 @@
 {
-  "name": "cypress-dojo-ambev-web",
+  "name": "cypress-dojo-ambev-web-api",
   "version": "1.0.0",
-  "description": "Treinamento sobre Cypress Web",
+  "description": "Treinamento sobre Cypress Web e API",
   "main": "index.js",
   "scripts": {
     "cy:open": "npx cypress open",
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/henriquecervi/cypress-dojo-ambev-web.git"
+    "url": "git+https://github.com/henriquecervi/cypress-dojo-ambev-web-api.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/henriquecervi/cypress-dojo-ambev-web/issues"
+    "url": "https://github.com/henriquecervi/cypress-dojo-ambev-web-api/issues"
   },
-  "homepage": "https://github.com/henriquecervi/cypress-dojo-ambev-web#readme",
+  "homepage": "https://github.com/henriquecervi/cypress-dojo-ambev-web-api#readme",
   "devDependencies": {
     "cypress": "^10.8.0",
     "faker-br": "^0.4.1"

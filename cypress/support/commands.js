@@ -96,3 +96,17 @@ Cypress.Commands.add('gerarToken', (email, senha) => {
     return response.body.jwt
   })
 })
+
+Cypress.Commands.add('addExperience', (token, requestBody) => {
+  cy.request({
+    method: 'PUT',
+    url: '/api/profile/experience',
+    headers: {
+      cookie: token
+    },
+    body: requestBody
+  })
+  .then((response) => {
+    return response.body.date
+  })
+})
